@@ -1,0 +1,15 @@
+# Copy this file to .env in the backend folder
+# Rename this file from SETUP_ENV.txt to .env
+
+# Option 1: MongoDB Atlas (Cloud - Easiest)
+# 1. Sign up at https://www.mongodb.com/cloud/atlas/register
+# 2. Create a free cluster
+# 3. Get your connection string from "Connect" → "Connect your application"
+# 4. Replace username, password, and cluster name below:
+
+MONGODB_URI=mongodb+srv://YOUR_USERNAME:YOUR_PASSWORD@cluster0.xxxxx.mongodb.net/smart-fridge?retryWrites=true&w=majority
+
+# Option 2: Local MongoDB
+# If you have MongoDB installed locally, uncomment the line below:
+# MONGODB_URI=mongodb://localhost:27017/smart-fridge
+
