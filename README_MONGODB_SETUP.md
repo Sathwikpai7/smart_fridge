@@ -118,4 +118,4 @@ The backend provides the following API endpoints:
 - The `useLocalStorage` hook is still in the codebase but is no longer used
 - All components have been updated to use the new API hooks
 - MongoDB `_id` fields are automatically mapped to `id` for frontend compatibility
-
+-collections will be there inside the mongo
