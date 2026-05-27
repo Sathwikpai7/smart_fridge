@@ -419,7 +419,7 @@ connectDB();
 app.use("/api/food-items", foodRoutes);
 app.use("/api/medicines",medicineRoutes)
 app.use("/api/settings",settingRoutes)
-app.use("/send-mail",sendToMail)
+app.use("/send-email",sendToMail)
 // WebSocket Server
 const wss = new WebSocket.Server({
   port: 3000,

@@ -237,9 +237,7 @@ const Inventory: React.FC = () => {
   return (
     <div className="space-y-6 p-4" style={{ minHeight: '200px', position: 'relative', zIndex: 1 }}>
       {/* Debug banner - remove this after confirming it works */}
-      <div className="bg-yellow-200 border-2 border-yellow-500 p-2 mb-4 rounded">
-        <strong>DEBUG:</strong> Inventory component is rendering! Items: {safeItems.length}, Filtered: {safeFilteredItems.length}
-      </div>
+      
       
       <div className="flex justify-between items-center">
         <div>
