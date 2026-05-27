@@ -66,7 +66,6 @@ This project combines a **Node.js/Express backend** with a **React TypeScript fr
 
 ### 📊 Dashboard
 - Overview of all inventory items
-- Sensor data visualization with Recharts
 - Quick statistics and insights
 - Category-wise item distribution
 
@@ -75,26 +74,25 @@ This project combines a **Node.js/Express backend** with a **React TypeScript fr
 ## 🛠️ Tech Stack
 
 ### Frontend
-- **Framework:** React 18.3.1
-- **Language:** TypeScript 5.5.3
-- **Build Tool:** Vite 5.4.2
-- **Styling:** TailwindCSS 3.4.1, PostCSS
-- **Routing:** React Router DOM 6.21.1
+- **Framework:** React 
+- **Language:** TypeScript 
+- **Build Tool:** Vite 
+- **Styling:** TailwindCSS 
+- **Routing:** React Router DOM 
 - **Components:** Lucide React (icons)
-- **Charts:** Recharts 2.9.0
-- **OCR:** Tesseract.js 5.0.4
-- **Notifications:** React Toastify 11.0.5
-- **Date Handling:** date-fns 3.0.6
-- **Linting:** ESLint 9.9.1
+- **OCR:** Tesseract.js 
+- **Notifications:** React Toastify 
+- **Date Handling:** date-fns 
+- **Linting:** ESLint
 
 ### Backend
 - **Runtime:** Node.js
-- **Server:** Express.js 5.1.0
-- **Database:** MongoDB with Mongoose 9.0.0
-- **Email:** Nodemailer 7.0.4
+- **Server:** Express.js 
+- **Database:** MongoDB with Mongoose 
+- **Email:** Nodemailer 
 - **Real-time:** WebSocket (ws)
-- **CORS:** cors 2.8.5
-- **Environment:** dotenv 17.2.3
+- **CORS:** cors 
+- **Environment:** dotenv 
 
 ### External APIs
 - Google Gemini API (AI recipe suggestions)
@@ -106,76 +104,89 @@ This project combines a **Node.js/Express backend** with a **React TypeScript fr
 
 ```
 smart_fridge/
+│
 ├── backend/
-│   ├── server.js                 # Main Express server
-│   ├── package.json              # Backend dependencies
-│   ├── SETUP_ENV.txt            # .env setup template
-│   └── models/
-│       ├── FoodItem.js          # Food item schema
-│       ├── Medicine.js          # Medicine schema
-│       ├── Sensor.js            # Sensor data schema
-│       └── Settings.js          # User settings schema
+│   │
+│   ├── server.js
+│   ├── package.json
+│   ├── .env
+│   │
+│   ├── config/
+│   │   ├── db.js
+│   │   └── mail.js
+│   │
+│   ├── controllers/
+│   │   ├── foodController.js
+│   │   ├── medicineController.js
+│   │   ├── settingsController.js
+│   │   └── mailController.js
+│   │
+│   ├── routes/
+│   │   ├── foodRoutes.js
+│   │   ├── medicineRoutes.js
+│   │   ├── settingsRoutes.js
+│   │   └── mailRoutes.js
+│   │
+│   ├── models/
+│   │   ├── FoodItem.js
+│   │   ├── Medicine.js
+│   │   ├── SensorData.js
+│   │   └── Settings.js
+│   │
+│   └── node_modules/
+│
 │
 ├── project/
+│   │
 │   ├── src/
-│   │   ├── App.tsx              # Main app component
-│   │   ├── main.tsx             # React entry point
-│   │   ├── vite-env.d.ts        # Vite type definitions
-│   │   ├── index.css            # Global styles
 │   │   │
-│   │   ├── pages/               # Page components
-│   │   │   ├── Dashboard.tsx    # Main dashboard
-│   │   │   ├── Inventory.tsx    # Food inventory page
-│   │   │   ├── Medicine.tsx     # Medicine management
-│   │   │   ├── Sensors.tsx      # Sensor monitoring
-│   │   │   ├── Recipes.tsx      # Recipe suggestions
-│   │   │   ├── Settings.tsx     # User settings
-│   │   │   ├── Scan.tsx         # OCR scanning
-│   │   │   ├── RemoveItem.tsx   # Item removal
-│   │   │   ├── Upload.tsx       # Batch upload
-│   │   │   ├── GeminiDebug.tsx  # Gemini API testing
-│   │   │   └── MethaneAlertTest.tsx
+│   │   ├── components/
+│   │   │   ├── Layout.tsx
+│   │   │   ├── ItemCard.tsx
+│   │   │   ├── RecipeCard.tsx
+│   │   │   ├── ExpiryTimer.tsx
+│   │   │   └── CategoryCard.tsx
 │   │   │
-│   │   ├── components/          # Reusable components
-│   │   │   ├── Layout.tsx       # Layout wrapper
-│   │   │   ├── CategoryCard.tsx # Category display
-│   │   │   ├── ItemCard.tsx     # Item card component
-│   │   │   ├── RecipeCard.tsx   # Recipe display
-│   │   │   ├── ExpiryTimer.tsx  # Expiry countdown
-│   │   │   ├── GeminiTest.tsx   # Gemini test component
-│   │   │   └── MethaneAlertTest.tsx
+│   │   ├── pages/
+│   │   │   ├── Dashboard.tsx
+│   │   │   ├── Inventory.tsx
+│   │   │   ├── Medicine.tsx
+│   │   │   ├── Sensors.tsx
+│   │   │   ├── Recipes.tsx
+│   │   │   ├── Settings.tsx
+│   │   │   ├── Scan.tsx
+│   │   │   ├── Upload.tsx
+│   │   │   └── RemoveItem.tsx
 │   │   │
-│   │   ├── hooks/               # Custom React hooks
-│   │   │   ├── useAPI.ts        # API call wrapper
+│   │   ├── hooks/
+│   │   │   ├── useAPI.ts
 │   │   │   └── useLocalStorage.ts
 │   │   │
-│   │   ├── utils/               # Utility functions
-│   │   │   ├── dateUtils.ts     # Date calculations
-│   │   │   ├── emailUtils.ts    # Email sending
-│   │   │   ├── geminiUtils.ts   # Gemini integration
-│   │   │   ├── ocrUtils.ts      # OCR functions
-│   │   │   ├── sensorUtils.ts   # Sensor data handling
+│   │   ├── utils/
+│   │   │   ├── geminiUtils.ts
+│   │   │   ├── emailUtils.ts
+│   │   │   ├── ocrUtils.ts
+│   │   │   ├── sensorUtils.ts
 │   │   │   ├── methaneAlertUtils.ts
-│   │   │   └── defaultImages.ts
+│   │   │   └── dateUtils.ts
 │   │   │
 │   │   ├── types/
-│   │   │   └── index.ts         # TypeScript types
+│   │   │   └── index.ts
 │   │   │
-│   │   └── data/
-│   │       └── recipes.ts       # Sample recipes data
+│   │   ├── App.tsx
+│   │   ├── main.tsx
+│   │   └── index.css
 │   │
-│   ├── package.json             # Frontend dependencies
-│   ├── vite.config.ts           # Vite configuration
-│   ├── tsconfig.json            # TypeScript config
-│   ├── tailwind.config.js       # TailwindCSS config
-│   ├── postcss.config.js        # PostCSS config
-│   ├── eslint.config.js         # ESLint config
-│   └── index.html               # HTML entry point
+│   ├── .env
+│   ├── package.json
+│   ├── vite.config.ts
+│   ├── tsconfig.json
+│   └── node_modules/
 │
-├── README.md                    # Quick start guide
-├── QUICK_START.md              # MongoDB setup quick start
-├── MONGODB_SETUP_GUIDE.md      # Detailed MongoDB setup
-└── package.json                # Root package.json
+│
+├── README.md
+├── .gitignore
+└── package.json
 
 ```
 
@@ -448,13 +459,13 @@ MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/smart-fridge?ret
 
 **Note:** The backend has pre-configured Gmail credentials. For production, create your own Gmail App Password.
 
-### Step 5: Optional - Google Gemini API Setup
+### Step 5: Optional - Google GROQ API Setup
 
 For recipe suggestions to work:
 
-1. Get API key from https://makersuite.google.com/app/apikey
+1. Get API key 
 2. Add to frontend environment or store in a config file
-3. Update `geminiUtils.ts` with your API key
+3. Update the .env with the API key
 
 ---
 
@@ -705,12 +716,6 @@ curl -X POST http://localhost:4000/send-email \
 
 ---
 
-## 📄 License
-
-This project is licensed under the ISC License - see the LICENSE file for details.
-
----
-
 ## 📞 Support
 
 For issues or questions:
@@ -742,5 +747,4 @@ cd project && npm run dev
 ---
 
 **Last Updated:** May 2026
-**Version:** 1.0.0
 **Status:** Active Development
