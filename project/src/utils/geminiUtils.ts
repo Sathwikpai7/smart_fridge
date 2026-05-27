@@ -1,7 +1,8 @@
 import { Recipe } from '../types';
 
-const GEMINI_API_KEY = 'AIzaSyCswlWXhR_4vr6ByJKMKgfBtT2HAZfwSMc';
-const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
+
+const GROQ_API_KEY = import.meta.env.VITE_GROQ_API_KEY;
+const GROQ_API_URL = import.meta.env.VITE_GROQ_API_URL;
 
 export interface GeminiRecipeResponse {
   id: string;
@@ -15,36 +16,33 @@ export interface GeminiRecipeResponse {
   tags?: string[];
 }
 
-// Simple test function to check if Gemini API is working
+// Simple test function to check if Groq API is working
 export const testGeminiConnection = async (): Promise<boolean> => {
-  console.log('🔍 Starting Gemini connection test...');
-  console.log('📡 API URL:', GEMINI_API_URL);
-  console.log('🔑 API Key:', GEMINI_API_KEY.substring(0, 10) + '...');
+  console.log('🔍 Starting Groq connection test...');
+  console.log('📡 API URL:', GROQ_API_URL);
+  console.log('🔑 API Key:', GROQ_API_KEY.substring(0, 10) + '...');
   
   try {
     const requestBody = {
-      contents: [
+      model: 'llama-3.1-8b-instant',
+      messages: [
         {
-          parts: [
-            {
-              text: "Say 'Hello, Gemini is working!' and respond with a simple JSON: {\"status\": \"ok\", \"message\": \"Hello, Gemini is working!\"}"
-            }
-          ]
+          role: 'user',
+          content: "Say 'Hello, Groq is working!' and respond with a simple JSON: {\"status\": \"ok\", \"message\": \"Hello, Groq is working!\"}"
         }
       ],
-      generationConfig: {
-        temperature: 0.1,
-        maxOutputTokens: 100,
-      }
+      temperature: 0.1,
+      max_tokens: 100,
     };
 
-    console.log('📤 Sending request to Gemini API...');
+    console.log('📤 Sending request to Groq API...');
     console.log('📦 Request body:', JSON.stringify(requestBody, null, 2));
 
-    const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
+    const response = await fetch(GROQ_API_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${GROQ_API_KEY}`
       },
       body: JSON.stringify(requestBody)
     });
@@ -56,7 +54,7 @@ export const testGeminiConnection = async (): Promise<boolean> => {
     
     if (!response.ok) {
       const errorText = await response.text();
-      console.error('❌ Gemini API error response:');
+      console.error('❌ Groq API error response:');
       console.error('   Status:', response.status);
       console.error('   Status Text:', response.statusText);
       console.error('   Error Body:', errorText);
@@ -69,22 +67,22 @@ export const testGeminiConnection = async (): Promise<boolean> => {
         console.error('   Raw Error Text:', errorText);
       }
       
-      throw new Error(`Gemini API error: ${response.status} ${response.statusText} - ${errorText}`);
+      throw new Error(`Groq API error: ${response.status} ${response.statusText} - ${errorText}`);
     }
 
     const data = await response.json();
-    console.log('✅ Gemini test response data:', JSON.stringify(data, null, 2));
+    console.log('✅ Groq test response data:', JSON.stringify(data, null, 2));
     
-    if (data.candidates && data.candidates[0] && data.candidates[0].content) {
+    if (data.choices && data.choices[0] && data.choices[0].message) {
       console.log('✅ Response structure is valid');
-      console.log('📝 Response text:', data.candidates[0].content.parts[0].text);
+      console.log('📝 Response text:', data.choices[0].message.content);
     } else {
       console.error('❌ Invalid response structure:', data);
     }
     
     return true;
   } catch (error) {
-    console.error('❌ Gemini connection test failed:');
+    console.error('❌ Groq connection test failed:');
     console.error('   Error type:', error.constructor.name);
     console.error('   Error message:', error.message);
     console.error('   Error stack:', error.stack);
@@ -130,28 +128,25 @@ Make sure the response is ONLY valid JSON, no extra text.`;
     console.log('📝 Generated prompt:', prompt);
     
     const requestBody = {
-      contents: [
+      model: 'llama-3.1-8b-instant',
+      messages: [
         {
-          parts: [
-            {
-              text: prompt
-            }
-          ]
+          role: 'user',
+          content: prompt
         }
       ],
-      generationConfig: {
-        temperature: 0.3,
-        maxOutputTokens: 1500,
-      }
+      temperature: 0.3,
+      max_tokens: 1500,
     };
 
-    console.log('📤 Sending request to Gemini API...');
+    console.log('📤 Sending request to Groq API...');
     console.log('📦 Request body:', JSON.stringify(requestBody, null, 2));
     
-    const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
+    const response = await fetch(GROQ_API_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${GROQ_API_KEY}`
       },
       body: JSON.stringify(requestBody)
     });
@@ -162,7 +157,7 @@ Make sure the response is ONLY valid JSON, no extra text.`;
     
     if (!response.ok) {
       const errorText = await response.text();
-      console.error('❌ Gemini API error response:');
+      console.error('❌ Groq API error response:');
       console.error('   Status:', response.status);
       console.error('   Status Text:', response.statusText);
       console.error('   Error Body:', errorText);
@@ -175,18 +170,18 @@ Make sure the response is ONLY valid JSON, no extra text.`;
         console.error('   Raw Error Text:', errorText);
       }
       
-      throw new Error(`Gemini API error: ${response.status} ${response.statusText} - ${errorText}`);
+      throw new Error(`Groq API error: ${response.status} ${response.statusText} - ${errorText}`);
     }
 
     const data = await response.json();
-    console.log('✅ Gemini API response structure:', JSON.stringify(data, null, 2));
+    console.log('✅ Groq API response structure:', JSON.stringify(data, null, 2));
     
-    if (!data.candidates || !data.candidates[0] || !data.candidates[0].content) {
+    if (!data.choices || !data.choices[0] || !data.choices[0].message) {
       console.error('❌ Invalid response format:', data);
-      throw new Error('Invalid response format from Gemini API');
+      throw new Error('Invalid response format from Groq API');
     }
 
-    const textResponse = data.candidates[0].content.parts[0].text;
+    const textResponse = data.choices[0].message.content;
     console.log('📝 Raw text response:', textResponse);
     console.log('📏 Response length:', textResponse.length);
     
@@ -205,7 +200,7 @@ Make sure the response is ONLY valid JSON, no extra text.`;
       if (!jsonMatch) {
         console.error('❌ No valid JSON array found in response');
         console.error('📝 Full response text:', textResponse);
-        throw new Error('No valid JSON found in Gemini response');
+        throw new Error('No valid JSON found in Groq response');
       }
       
       console.log('🔍 Found JSON match:', jsonMatch[0]);
@@ -226,7 +221,7 @@ Make sure the response is ONLY valid JSON, no extra text.`;
       console.log(`🍽️ Processing recipe ${index + 1}:`, recipe.name);
       
       const processedRecipe = {
-        id: recipe.id || `gemini-${Date.now()}-${index}`,
+        id: recipe.id || `groq-${Date.now()}-${index}`,
         name: recipe.name,
         ingredients: recipe.ingredients || [],
         instructions: recipe.instructions || [],
@@ -244,7 +239,7 @@ Make sure the response is ONLY valid JSON, no extra text.`;
     return result;
 
   } catch (error) {
-    console.error('❌ Error generating recipes with Gemini:');
+    console.error('❌ Error generating recipes with Groq:');
     console.error('   Error type:', error.constructor.name);
     console.error('   Error message:', error.message);
     console.error('   Error stack:', error.stack);
@@ -322,34 +317,31 @@ Return ONLY a valid JSON array like this:
   }
 ]`;
 
-    const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
+    const response = await fetch(GROQ_API_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${GROQ_API_KEY}`
       },
       body: JSON.stringify({
-        contents: [
+        model: 'llama-3.1-8b-instant',
+        messages: [
           {
-            parts: [
-              {
-                text: prompt
-              }
-            ]
+            role: 'user',
+            content: prompt
           }
         ],
-        generationConfig: {
-          temperature: 0.3,
-          maxOutputTokens: 1000,
-        }
+        temperature: 0.3,
+        max_tokens: 1000,
       })
     });
 
     if (!response.ok) {
-      throw new Error(`Gemini API error: ${response.status}`);
+      throw new Error(`Groq API error: ${response.status}`);
     }
 
     const data = await response.json();
-    const textResponse = data.candidates[0].content.parts[0].text;
+    const textResponse = data.choices[0].message.content;
     
     // Try direct JSON parse first
     let recipes: GeminiRecipeResponse[];
@@ -381,18 +373,18 @@ Return ONLY a valid JSON array like this:
 
 // Global test functions that can be called from browser console
 (window as any).testGeminiFromConsole = async () => {
-  console.log('🧪 Testing Gemini from browser console...');
+  console.log('🧪 Testing Groq from browser console...');
   try {
     const isWorking = await testGeminiConnection();
     if (isWorking) {
-      console.log('✅ Gemini API is working!');
+      console.log('✅ Groq API is working!');
       
       // Test recipe generation
       console.log('🍳 Testing recipe generation...');
       const recipes = await generateRecipesWithGemini(['chicken', 'rice'], 1);
       console.log('✅ Recipe generation successful:', recipes);
     } else {
-      console.log('❌ Gemini API is not working');
+      console.log('❌ Groq API is not working');
     }
   } catch (error) {
     console.error('❌ Test failed:', error);
@@ -407,8 +399,8 @@ Return ONLY a valid JSON array like this:
 
 // Global function to show current API configuration
 (window as any).showGeminiConfig = () => {
-  console.log('🔧 Gemini API Configuration:');
-  console.log('   API URL:', GEMINI_API_URL);
-  console.log('   API Key:', GEMINI_API_KEY.substring(0, 10) + '...');
-  console.log('   Model: gemini-pro');
+  console.log('🔧 Groq API Configuration:');
+  console.log('   API URL:', GROQ_API_URL);
+  console.log('   API Key:', GROQ_API_KEY.substring(0, 10) + '...');
+  console.log('   Model: llama-3.1-8b-instant');
 }; 

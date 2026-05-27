@@ -13,15 +13,6 @@ interface ItemCardProps {
 const ItemCard: React.FC<ItemCardProps> = ({ item, onEdit, onDelete }) => {
   return (
     <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
-      {item.image && (
-        <div className="h-32 bg-gray-200 overflow-hidden">
-          <img
-            src={item.image}
-            alt={item.name}
-            className="w-full h-full object-cover"
-          />
-        </div>
-      )}
       <div className="p-4">
         <div className="flex justify-between items-start mb-2">
           <h3 className="text-lg font-semibold text-gray-900 truncate">{item.name}</h3>

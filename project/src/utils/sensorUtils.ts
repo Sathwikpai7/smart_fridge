@@ -8,6 +8,7 @@ const ESP32_CONFIG = {
   timeout: 5000, // 5 second timeout
 };
 
+
 // Check if ESP32 is reachable
 export const checkESP32Connection = async (): Promise<boolean> => {
   try {

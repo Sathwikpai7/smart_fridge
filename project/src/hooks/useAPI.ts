@@ -86,7 +86,7 @@ export function useFoodItems() {
     try {
       const response = await fetch(`${API_BASE_URL}/food-items/${id}`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': '' },
         body: JSON.stringify(item)
       });
       if (!response.ok) throw new Error('Failed to update item');
