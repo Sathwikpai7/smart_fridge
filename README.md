@@ -9,14 +9,14 @@
 - [Project Structure](#project-structure)
 - [Database Models](#database-models)
 - [API Routes](#api-routes)
-- [Installation & Setup](#installation--setup)
+- [Installation and Setup](#installation--setup)
 - [Running the Project](#running-the-project)
 - [Configuration](#configuration)
 - [WebSocket Integration](#websocket-integration)
 
 ---
 
-## 🎯 Project Overview
+## Project Overview
 
 Smart Fridge is an IoT-enabled food management system that helps users:
 - Track food items and their expiry dates
@@ -379,7 +379,7 @@ Stores user preferences and alert thresholds.
 
 ---
 
-## 📦 Installation & Setup
+## 📦 Installation and Setup
 
 ### Prerequisites
 - **Node.js** (v14 or higher)
