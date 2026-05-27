@@ -30,7 +30,7 @@ This project combines a **Node.js/Express backend** with a **React TypeScript fr
 
 ---
 
-## ✨ Features
+## Features
 
 ### 🍔 Food Inventory Management
 - Add, update, and delete food items
@@ -100,7 +100,7 @@ This project combines a **Node.js/Express backend** with a **React TypeScript fr
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 smart_fridge/
@@ -192,7 +192,7 @@ smart_fridge/
 
 ---
 
-## 🗄️ Database Models
+## Database Models
 
 ### 1. **FoodItem Schema**
 Stores information about food items in the fridge.
@@ -286,7 +286,7 @@ Stores user preferences and alert thresholds.
 
 ---
 
-## 🔌 API Routes
+## API Routes
 
 ### **Base URL:** `http://localhost:4000`
 
@@ -379,7 +379,7 @@ Stores user preferences and alert thresholds.
 
 ---
 
-## 📦 Installation and Setup
+## Installation and Setup
 
 ### Prerequisites
 - **Node.js** (v14 or higher)
@@ -515,7 +515,7 @@ VITE v5.4.2  ready in 234 ms
 
 ---
 
-## ⚙️ Configuration
+## Configuration
 
 ### Backend Configuration
 
@@ -560,7 +560,7 @@ app.use(cors({
 
 ---
 
-## 🔌 WebSocket Integration
+## WebSocket Integration
 
 ### Real-time Sensor Data Streaming
 
@@ -595,7 +595,7 @@ ws.onmessage = (event) => {
 
 ---
 
-## 📱 API Usage Examples
+## API Usage Examples
 
 ### Create a Food Item
 
@@ -642,7 +642,7 @@ curl -X POST http://localhost:4000/send-email \
 
 ---
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### MongoDB Connection Error
 **Error:** `MongooseServerSelectionError: connect ECONNREFUSED`
@@ -676,7 +676,7 @@ curl -X POST http://localhost:4000/send-email \
 
 ---
 
-## 📚 Frontend Pages
+## Frontend Pages
 
 | Page | Route | Features |
 |------|-------|----------|
@@ -692,7 +692,7 @@ curl -X POST http://localhost:4000/send-email \
 
 ---
 
-## 🔐 Security Notes
+## Security Notes
 
 ⚠️ **Production Considerations:**
 1. **Don't commit `.env` file** - Add to `.gitignore`
@@ -706,7 +706,7 @@ curl -X POST http://localhost:4000/send-email \
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
@@ -716,7 +716,7 @@ curl -X POST http://localhost:4000/send-email \
 
 ---
 
-## 📞 Support
+## Support
 
 For issues or questions:
 1. Check existing documentation in `MONGODB_SETUP_GUIDE.md`
@@ -726,7 +726,7 @@ For issues or questions:
 
 ---
 
-## 🎉 Getting Started Quick Commands
+## Getting Started Quick Commands
 
 ```bash
 # Clone & install
