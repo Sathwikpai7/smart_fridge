@@ -20,7 +20,33 @@ const sendMail=async (req, res) => {
   }
 };
 
+const testMail= async (req, res) => {
+
+  try {
+
+    await transporter.sendMail({
+      from: 'sathwik11112005@gmail.com',
+      to: 'sathwik11112005@gmail.com',
+      subject: 'Smart Fridge Test',
+      text: 'Email system working'
+    });
+
+    console.log("Test mail sent");
+
+    res.send("Mail sent successfully");
+
+  } catch (err) {
+
+    console.log(err);
+
+    res.send("Mail failed");
+
+  }
+
+};
+
 
 module.exports = {
-    sendMail
+    sendMail, 
+    testMail
 };

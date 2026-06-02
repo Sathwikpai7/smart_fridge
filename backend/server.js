@@ -403,6 +403,7 @@ const medicineRoutes = require("./routes/medicineroutes");
 const Settings = require("./models/Settings");
 const settingRoutes=require("./routes/settingsRoutes.js")
 const sendToMail=require("./routes/mailRoutes")
+require("./jobs/expiryJobs");
 
 const app = express();
 
