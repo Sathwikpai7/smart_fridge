@@ -1,5 +1,6 @@
 
 const transporter = require("../config/mail");
+const emailQueue = require("../queues/emailQueue");
 
 const sendMail=async (req, res) => {
   const { to, subject, text } = req.body;
@@ -23,17 +24,26 @@ const sendMail=async (req, res) => {
 const testMail= async (req, res) => {
 
   try {
-
-    await transporter.sendMail({
+    await emailQueue.add("sendEmail",{
       from: 'sathwik11112005@gmail.com',
       to: 'sathwik11112005@gmail.com',
       subject: 'Smart Fridge Test',
       text: 'Email system working'
     });
+   
+   // without the bull mq  user directly sends the acess to express server to send mail
+   //Request comes
+   //   ↓
+   //Server sends mail directly
+    //   ↓
+     //Server waits until mail completes
+ //     ↓
+    //Then response sent
+    
 
-    console.log("Test mail sent");
+   
 
-    res.send("Mail sent successfully");
+    res.send("Email added to queue");
 
   } catch (err) {
 
